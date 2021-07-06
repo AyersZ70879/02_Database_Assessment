@@ -1,0 +1,54 @@
+Breed,Breed_ID,AltBreedName,LapCat_ID,Fur_ID,MaleWtKg,AvgKittenPrice
+Abyssinian,1,,1,4,4,1050
+American Curl,2,,1,3,4,1400
+American Shorthair,3,,1,4,6,900
+Applehead Siamese,4,,1,4,6,1600
+Balinese,5,,2,2,4,1300
+Bengal,6,,2,3,6,1250
+Birman,7,,1,2,5,850
+Bombay,8,,1,4,4,500
+British Shorthair,9,,1,4,7,1750
+Burmese,10,,1,4,5,1250
+Burmilla,11,,1,2,5,600
+Canadian Hairless,12,,1,1,5,1450
+Chartreux,13,,1,4,6,1250
+Chausie,14,,2,4,5,1500
+Chinchilla,15,,3,4,1,200
+Cymric,16,,1,2,5,400
+Devon Rex,17,,1,4,3,800
+Dilute Calico,18,,4,4,6,100
+Dilute Tortoiseshell,19,,4,4,6,100
+Domestic Medium Hair,20,,4,3,6,100
+Domestic Short Hair,21,,4,4,6,100
+Egyptian Mau,22,,1,3,5,800
+Exotic Shorthair,23,,1,4,5,1750
+Havana,24,,1,3,4,900
+Himalayan,25,,1,2,6,800
+Japanese Bobtail,26,,1,2,4,800
+Javanese,27,,2,3,4,1200
+LaPerm,28,,1,2,4,500
+Maine Coon,29,,1,2,7,1600
+Manx,30,,1,4,5,500
+Munchkin,31,,1,3,3,1500
+Norwegian Forest Cat,32,,2,2,6,1000
+Ocicat,33,,2,4,6,850
+Oriental Long Hair,34,,1,2,4,1150
+Oriental Short Hair,35,,1,4,4,1150
+Persian,36,,1,2,6,1250
+Pixie-Bob,37,,1,3,6,700
+Ragamuffin,38,,1,3,7,1000
+Ragdoll,39,,1,2,7,1000
+Scottish Fold,40,,2,4,4,1250
+Selkirk Rex,41,,1,2,6,1150
+Siamese,42,,1,4,6,500
+Siberian,43,,2,2,6,1000
+Singapura,44,,1,4,3,1150
+Snowshoe,45,,1,4,5,800
+Somali,46,,2,2,5,1250
+Sphynx,47,hairless cat,1,1,5,1450
+Tiger,48,,1,4,6,900
+Tonkinese,49,,1,3,5,800
+Torbie,50,,4,4,6,100
+Tortoiseshell,51,,4,4,6,100
+Turkish Van,52,,2,2,6,500
+Tuxedo,53,,4,4,6,100
