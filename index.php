@@ -16,7 +16,7 @@
     
     <!-- Edit the name of your style sheet - 'foo' is not a valid name!! -->
     <link rel="stylesheet" href="css/cat_breeds.css"> 
-        <link rel="stylesheet" href="theme/font-awesome.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
     
 </head>
     
