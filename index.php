@@ -29,7 +29,9 @@
         <div class="box banner">
             
     
-            <h1>Cat Characteristics</h1>
+            <h1>
+                <a href="index.php" class="home" >Cat Characteristics</a>
+            </h1>
         </div>    <!-- / banner -->
 
         <!-- Navigation goes here.  Edit BOTH the file name and the link name -->

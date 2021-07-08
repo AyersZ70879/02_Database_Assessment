@@ -137,14 +137,16 @@ a:link{color: #FD9886;} /* warm medium pink*/
 a:visited{color: #FD9886;} /* warm medium brown */
 a:hover{color: #ffadad;}    /* cool light pink*/
 
+
 /* #### Headings / text styling #### */
 h1, h2, h3, h4 {
     font-family: 'Ubuntu', sans-serif;
 }
 
-h1 {
+a.home {
     color: #2B3B31;
 }
+
 
 .sub_heading {
     font-family: 'Ubuntu', sans-serif;
