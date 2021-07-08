@@ -1,5 +1,5 @@
-LapCat,LapCat_ID
-Lap,1
-Non Lap,2
-Rodent,3
-Generic,4
+LapCat_ID,LapCat
+1,Lap
+2,Non Lap
+3,Rodent
+4,Generic

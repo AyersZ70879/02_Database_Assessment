@@ -1,5 +1,5 @@
-Fur,Fur_ID
-Bald,1
-Long,2
-Medium,3
-Short,4
+Fur_ID,Fur
+1,Bald
+2,Long
+3,Medium
+4,Short
