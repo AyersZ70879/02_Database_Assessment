@@ -4,12 +4,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Put Content Here">
-    <meta name="keywords" content="Put keywords here">
-    <meta name="author" content="Put your name here">
+    <meta name="description" content="Cat Characteristics">
+    <meta name="keywords" content="cat, cat characteristics, pet characteristics, pet, pets, cats">
+    <meta name="author" content="Zarah Ayers">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>DB Name</title>
+    <title>Cat Characteristics</title>
     
     <!-- Edit the link below / replace with your chosen google font -->
     <link href="https://fonts.googleapis.com/css?family=Lato%7cUbuntu" rel="stylesheet"> 
@@ -29,7 +29,7 @@
         <div class="box banner">
             
     
-            <h1>DB Name</h1>
+            <h1>Cat Characteristics</h1>
         </div>    <!-- / banner -->
 
         <!-- Navigation goes here.  Edit BOTH the file name and the link name -->
@@ -37,9 +37,9 @@
             
             <div class="linkwrapper">
                 <div class="commonsearches">
-                    <a href="#l">Item</a> | 
-                    <a href="#">Item</a> | 
-                    <a href="#">Item</a> 
+                    <a href="#l">Show All</a> | 
+                    <a href="#">Random</a> | 
+                    <a href="#">Recent</a> 
                 </div>  <!-- / common searches -->
             
                 <div class="topsearch">
@@ -65,25 +65,29 @@
         </div>    <!-- / nav -->        
         
         <div class="box main">
-            <h2>First Page heading</h2>
+            <h2>Cat Characteristics Database</h2>
             
             <p>
-                Sugar plum powder dessert bonbon powder lollipop lollipop muffin I love. Tiramisu dessert I love sugar plum apple pie marzipan chocolate bar brownie. Pudding tiramisu caramels biscuit tiramisu. I love gummies gummies pie sweet pudding I love I love. Donut halvah candy oat cake donut. Caramels wafer danish jelly-o.
+            This website contains information about different types of cats
             </p>
             
             <p>
-                Jelly beans gingerbread jelly tootsie roll. Lemon drops bear claw I love tiramisu candy canes cake. Jelly-o apple pie powder tart I    love candy tiramisu. Topping liquorice cake sesame snaps brownie. Lemon drops jelly beans brownie danish I love fruitcake cotton candy danish. Dragée pastry halvah macaroon I love chocolate bar caramels liquorice. Halvah cupcake muffin fruitcake pastry I love bear claw I love jelly. Tart chocolate bar croissant danish jelly. Sugar plum powder cupcake muffin gingerbread I love sweet.
+                It tells you about each cat type and what each are like as a pet    
             </p>
             
             <p>
-                Biscuit jelly I love jelly-o candy canes chupa chups topping lemon drops I love. Sesame snaps macaroon lemon drops carrot cake I love. Chocolate bar gingerbread chupa chups. Dessert chocolate pastry liquorice tootsie roll lemon drops sweet macaroon liquorice. I love muffin bonbon. Cupcake apple pie chocolate cake bonbon topping. Macaroon gummi bears dragée caramels donut chocolate.
+                You can view all the cat types in the show all tag, or you can find a random or recent cat types that have been added into the database    
+            </p>
+
+            <p>
+                If you are an admin you can also sign in and edit (by adding or removing) different types of cats  
             </p>
             
         </div>    <!-- / main -->
         
 
         <div class="box footer">
-            CC yourname 20XX
+            CC Zarah Ayers 2021
         </div>    <!-- / footer -->
     
     </div>  <!-- / wrapper  -->

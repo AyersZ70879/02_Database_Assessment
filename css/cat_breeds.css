@@ -9,7 +9,8 @@ body {
 .box {
     padding-left: 20px;
     /* border-radius: 10px; */
-    background-color: #ddd;
+    background-color: #FAE1DD; /* very light pink */
+
 }
 
 
@@ -30,23 +31,36 @@ body {
     
 }
 
+@media only screen and (max-width: 1100px) {
+    .wrapper{
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "banner"
+        "nav"
+        "main"
+        "footer";
+    }
+
+}
+
 .banner {
     grid-area: banner;
 }
 
 .nav {
     grid-area: nav;
-    background-color: #DDD;  /* silver */
+    background-color: #fcd5ce;  /* pale pink */
     font-size: 150%;
     padding: 20px;
     vertical-align: middle;
-    border: solid 1px;
+    border: solid 1px #fcd5ce;
 }
 
 .main {
     grid-area: main;
-    background-color: #eee;  /* very pale grey */
-    border: solid 1px #CCC;
+    background-color: #ffe5d9;  /* pale beige */
+    border: solid 1px #ffd7ba;
 }
 
 
@@ -60,7 +74,7 @@ body {
 
 .linkwrapper {
     display: grid;
-    grid-template-columns: 3fr 2fr 1fr;
+    grid-template-columns: 1fr 300px 200px;
     grid-template-areas: 
         "commonsearches topsearch topadmin";
     grid-gap: 4px;
@@ -82,38 +96,54 @@ body {
     text-align: center;
 }
 
+/* Make navigation responsive */
+@media only screen and (max-width: 900px) {
+    .linkwrapper{
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-template-areas:
+        "commonsearches commonsearches"
+        "top serach top admin"
+        ;
+    }
+}
+
 /* ### Additional div styling (put colours / corners here) */
 
 
 /* Area colouring... */
 
 /* logo, banner and footer background are the same */
-.logo, .banner, .footer {
-    background-color: #888;  /* dark grey */
+.banner, .footer {
+    background-color: #B8CCBF;  /* warm medium green */
 }
 
 /* Set font on dark areas to white */
-.logo, .banner, .side, .footer {
-    color: #fff;
+.banner, .side, .footer {
+    color: #f8edeb;
 }
 
 /* #### Links Styling  #### */
 
 /* Navigation Links */
 a.topnav {font-weight: bold;}
-a.topnav:link, a.topnav:visited {color: #007c72;} /*dark teal */
-a.topnav:hover {color: #707a00; text-decoration: none;} 
+a.topnav:link, a.topnav:visited {color: #fec5bb;} /*warm medium pink */
+a.topnav:hover {color: #ffadad; text-decoration: none;} /* cool medium pink */
 
 
 /* links in page */
 a {font-weight: bold;}
-a:link{color: #007c72;} /* dark teal */
-a:visited{color: #222;} /* dark grey */
-a:hover{color: #707a00;}    /* Dark Green*/
+a:link{color: #FD9886;} /* warm medium pink*/
+a:visited{color: #FD9886;} /* warm medium brown */
+a:hover{color: #ffadad;}    /* cool light pink*/
 
 /* #### Headings / text styling #### */
 h1, h2, h3, h4 {
     font-family: 'Ubuntu', sans-serif;
+}
+
+h1 {
+    color: #2B3B31;
 }
 
 .sub_heading {
@@ -129,7 +159,7 @@ form {
 }
 
 .search {
-    background:#fff;
+    background:#f8edeb; /* very light pink */
     width: 75%;
 }
 
@@ -145,7 +175,7 @@ form {
     font-size: 14px;
     
     left:-5px;
-    background-color: #636263; 
+    background-color: #FD9886; 
     color:#d6d3d7;
     border: 1px solid #000;
     border-radius: 0 5px 5px 0;   
@@ -155,7 +185,7 @@ form {
 
 
 input[type="submit"]:hover {
-    background-color: #000;
+    background-color: #ffadad;
 }
 
 
@@ -165,6 +195,11 @@ input {
     display: inline-block;
     border: 1px solid #000;
     box-sizing: border-box; 
+    width: 95%;
+}
+
+input.short {
+    width: 100px;
 }
 
 
@@ -173,3 +208,97 @@ input {
     display: inline-block;
 }
 
+/* ## Reults styling, includes 'tags' buttons ## */
+.results {
+    background-color: #c6d39b;
+    border: solid 1px #00726a;
+    padding: 10px;
+
+    margin-right: 20px;
+    border-radius: 20px;
+
+}
+
+.tag {
+    background-color: #eddcd2;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: solid 1px #e2aa89;
+    border-radius: 5px;
+}
+
+.about {
+    background-color: #e9ba94fa;
+    border: solid 1px #af9e6d;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.error {
+    background-color: #ffcece;
+    color: #721a1a;
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 1px #721a1a;
+}
+
+/* editing tools formatting */
+.edit-tools {
+    text-align: right;
+    padding-right: 20px;
+}
+
+/* Form Formatting css /*
+/* make height of drop downs slightly larger */
+select {
+    height: 40px;
+    padding: 5px;
+}
+
+
+/* controls input fields on autocomplete boxes (pink for and error, white for OK) */
+input.tag-error[type=text] {
+    background-color: #ff9e9e;
+}
+
+input.tag-ok[type=text] {
+    background-color: rgb(255, 255, 255);
+}
+
+.form-ok {
+    background-color: rgb(255, 255, 255);
+}
+
+.form-error {
+    background-color: #ff9e9e;
+}
+
+/* error messages */
+.no-error {
+    display: none;
+}
+
+.error-text {
+    color: darkred;
+}
+
+textarea,
+input[type=text] {
+    font-family: 'Lato', sans-serif;
+    padding: 10px;
+}
+
+textarea {
+    width: 90%;
+    max-width: 700px;
+}
+
+.add-field{
+    width: 90%;
+}
+
+.gender {
+    width: 95%;
+}
