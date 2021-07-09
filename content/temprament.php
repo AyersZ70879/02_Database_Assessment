@@ -5,7 +5,7 @@ if(!isset($_REQUEST['tempramentID'])) {
 
 $temp_to_find = $_REQUEST['tempramentID'];
 
-    // get subject heading...
+    // get temprament heading...
     $temp_sql = "SELECT * FROM `temprament` WHERE `Temprament_ID` = $temp_to_find";
     $temp_query = mysqli_query($dbconnect, $temp_sql);
     $temp_rs = mysqli_fetch_assoc($temp_query);
@@ -16,7 +16,7 @@ $temp_to_find = $_REQUEST['tempramentID'];
 
 <?php
 
-$find_sql = "SELECT * FROM `nreeds`
+$find_sql = "SELECT * FROM `breeds`
 JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`)
 WHERE `Temprament1_ID` = $temp_to_find
 OR `Temprament2_ID` = $temp_to_find
@@ -28,23 +28,23 @@ $find_rs = mysqli_fetch_assoc($find_query);
 // Loop through results and display them...
 do {
 
-    $quote = preg_replace('/[^A-Za-z0-9.,?\s\'\-]/', ' ', $find_rs['Quote']);
+    $breed = preg_replace('/[^A-Za-z0-9.,?\s\'\-]/', ' ', $find_rs['Breed']);
 
-    // author name... 
-    include("get_author.php");
+    // about cat name... 
+    include("get_about.php");
 
     ?>
 <div class="results">
     <p>
-        <?php echo $quote; ?> <br />
+        <?php echo $breed; ?> <br />
 
-        <a href="index.php?page=author&authorID=<?php echo $find_rs['Author_ID']; ?>">
+        <a href="index.php?page=about&aboutID=<?php echo $find_rs['About_ID']; ?>">
             <?php echo $full_name; ?> 
         </a>
     </p>
 
-    <!-- subject tags go here -->
-    <?php include("show_subjects.php"); ?>
+    <!-- temprament tags go here -->
+    <?php include("show_temp.php"); ?>
     
 </div>
 <br />

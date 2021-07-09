@@ -147,6 +147,10 @@ a.home {
     color: #2B3B31;
 }
 
+a.catdisplay {
+    color: #2B3B31;
+    font-size: 130%;
+}
 
 .sub_heading {
     font-family: 'Ubuntu', sans-serif;

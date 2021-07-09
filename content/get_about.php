@@ -3,6 +3,12 @@
     $breed = $find_rs['Breed'];
     $altname = $find_rs['AltBreedName'];
 
-    $full_name = $breed." (".$altname.") ";
-    
+    // if alt name is not blank
+    if ($altname != "") {
+        $full_name = $breed." (".$altname.") ";
+    }
+
+    else {
+        $full_name = $breed;
+    }
     ?>
