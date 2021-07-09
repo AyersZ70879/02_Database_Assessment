@@ -150,6 +150,10 @@ a.home {
 a.catdisplay {
     color: #2B3B31;
     font-size: 130%;
+    text-decoration: none;
+}
+a.catdisplay:hover{
+    color: #314b3b;
 }
 
 .sub_heading {
