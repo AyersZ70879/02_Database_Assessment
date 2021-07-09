@@ -21,6 +21,10 @@ do {
         <a class="catdisplay" href="index.php?page=about&aboutID=<?php echo $find_rs['Breed_ID']; ?>">
             <?php echo $full_name; ?>
         </a>
+
+        <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
+
+
     </p>
 
     <!-- get subject tags to display -->
