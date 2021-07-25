@@ -78,10 +78,10 @@ function get_rs($dbconnect, $sql)
 }
 
 
-function country_job($dbconnect, $entity_1, $entity_2, $label_sg, $label_pl, $table, $entity_ID, $entity_name)
+function fur_lap($dbconnect, $entity_1, $label_sg, $table, $entity_ID, $entity_name)
 {
     
-    $all_entities = array($entity_1, $entity_2);
+    $all_entities = array($entity_1);
     // loop through items and look up their values...
     
     // Counts # of countries that without ID zero...
@@ -92,8 +92,6 @@ function country_job($dbconnect, $entity_1, $entity_2, $label_sg, $label_pl, $ta
     {
     echo "<b>".$label_sg."</b>: ";
     }
-    
-    else { echo "<b>".$label_pl."</b>: ";}
     
     foreach ($all_entities as $entity) {
     
@@ -106,7 +104,7 @@ function country_job($dbconnect, $entity_1, $entity_2, $label_sg, $label_pl, $ta
     ?>
     
         
-    <span class="author_entity tag"><?php echo $entity_rs[$entity_name]; ?> </span> &nbsp;
+    <span class="author_entity"><?php echo $entity_rs[$entity_name]; ?> </span> &nbsp;
       
     <?php
         

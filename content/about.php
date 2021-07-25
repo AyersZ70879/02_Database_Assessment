@@ -26,16 +26,6 @@ include("get_about.php");
         <?php echo $full_name ?> - About
     </h2>
 
-    <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
-
-    <p>
-        <!-- put lap cat info here -->
-    </p>
-    
-    <p>
-        <!-- put fur info here -->
-    </p>
-
     <?php
 
     // if logged in, show edit / delete options... 
@@ -70,7 +60,7 @@ include("get_about.php");
 <?php
 
 // see if there are any cat breeds
-$find_breeds_sql = "SELECT * FROM `breeds` WHERE `Breeds_ID` = 
+$find_breeds_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = 
 $about_to_find";
 $find_breeds_query = mysqli_query($dbconnect, $find_breeds_sql);
 $find_breeds_rs = mysqli_fetch_assoc($find_breeds_query);
@@ -88,15 +78,33 @@ $count = mysqli_num_rows($find_breeds_query);
 // Loop through results and display them...
 do {
 
-    $quote = preg_replace('/[^A-Za-z0-9.,?\s\'\-]/', ' ', $find_rs['Breed']);
-
+    $breed = preg_replace('/[^A-Za-z0-9.,?\s\'\-]/', ' ', $find_rs['Breed']);
     
 
     ?>
 <div class="results">
+    <!-- get male weight to display -->
+    <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
+
+    <!-- Get avg kitten price -->
+    <p><b>Average Kitten Price: </b>$ <?php echo $find_rs['AvgKittenPrice']; ?> </p>
+
+    <!-- Get fur type -->
     <p>
-        <?php echo $breed; ?> <br />
-        
+        <?php
+        // show fur type....
+        fur_lap($dbconnect, $fur, "Fur Type", "fur", "Fur_ID", 
+        "Fur")
+        ?>
+    </p>
+
+    <!-- Get lap type -->
+    <p>
+        <?php
+        // show lap type....
+        fur_lap($dbconnect, $fur, "Lap Cat Type", "lapcat", "LapCat_ID", 
+        "LapCat")
+        ?>
     </p>
 
     <!-- get temprament tags to display -->
