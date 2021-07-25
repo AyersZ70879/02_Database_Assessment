@@ -12,8 +12,8 @@
             <div class="linkwrapper">
                 <div class="commonsearches">
                     <a href="index.php?page=showall">Show All</a> | 
-                    <a href="#">Random</a> | 
-                    <a href="#">Recent</a> 
+                    <a href="index.php?page=random">Random</a> | 
+                    <a href="index.php?page=recent">Recent</a> 
                 </div>  <!-- / common searches -->
             
                 <div class="topsearch">
