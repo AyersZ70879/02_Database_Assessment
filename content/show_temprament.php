@@ -3,9 +3,9 @@
         <?php
              $temp1_ID = $find_rs['Temprament1_ID'];
              $temp2_ID = $find_rs['Temprament2_ID'];
-             $sub3_ID = $find_rs['Temprament3_ID'];
+             $temp3_ID = $find_rs['Temprament3_ID'];
 
-             $all_subjects = array($sub1_ID, $sub2_ID, $sub3_ID);
+             $all_temp = array($temp1_ID, $temp2_ID, $temp3_ID);
 
              // loop through subject ID's and loop up the subject name
              foreach($all_subjects as $subject) {
