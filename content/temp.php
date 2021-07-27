@@ -46,7 +46,7 @@ do {
     <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
 
     <!-- Get avg kitten price -->
-    <p><b>Average Kitten Price: </b>$ <?php echo $find_rs['AvgKittenPrice']; ?> </p>
+    <p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
 
     
 
