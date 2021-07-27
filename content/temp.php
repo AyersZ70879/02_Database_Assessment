@@ -1,9 +1,9 @@
 <?php
-if(!isset($_REQUEST['TempramentID'])) {
+if(!isset($_REQUEST['tempID'])) {
     header('Location: index.php');
 }
 
-$temp_to_find = $_REQUEST['Temprament_ID'];
+$temp_to_find = $_REQUEST['tempID'];
 
     // get temprament heading...
     $temp_sql = "SELECT * FROM `temprament` WHERE `Temprament_ID` = $temp_to_find";
@@ -36,12 +36,19 @@ do {
     ?>
 <div class="results">
     <p>
-        <?php echo $breed; ?> <br />
-
-        <a href="index.php?page=about&aboutID=<?php echo $find_rs['About_ID']; ?>">
-            <?php echo $full_name; ?> 
+    <!-- display cat name -->
+    <a class="catdisplay" href="index.php?page=about&aboutID=<?php echo $find_rs['Breed_ID']; ?>">
+            <?php echo $full_name; ?>
         </a>
     </p>
+
+    <!-- get male weight to display -->
+    <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
+
+    <!-- Get avg kitten price -->
+    <p><b>Average Kitten Price: </b>$ <?php echo $find_rs['AvgKittenPrice']; ?> </p>
+
+    
 
     <!-- temprament tags go here -->
     <?php include("show_temp.php"); ?>
