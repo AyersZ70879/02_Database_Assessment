@@ -1,9 +1,9 @@
 <?php
-if(!isset($_REQUEST['tempramentID'])) {
+if(!isset($_REQUEST['TempramentID'])) {
     header('Location: index.php');
 }
 
-$temp_to_find = $_REQUEST['tempramentID'];
+$temp_to_find = $_REQUEST['Temprament_ID'];
 
     // get temprament heading...
     $temp_sql = "SELECT * FROM `temprament` WHERE `Temprament_ID` = $temp_to_find";
