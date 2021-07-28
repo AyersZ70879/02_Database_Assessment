@@ -1,12 +1,13 @@
 <?php
-
+// get header
 if(!isset($_REQUEST['aboutID']))
 {
     header('Location: index.php');
 }
-
+// get breed ID
 $about_to_find = $_REQUEST['aboutID'];
 
+// get breed from database
 $find_sql = "SELECT * FROM `about`
 WHERE `Breed_ID` = $about_to_find
 ";
@@ -35,6 +36,7 @@ include("get_about.php");
 
         <div class="edit-tools">
 
+        <!-- display edit symbol for cat breed -->
         <a href="index.php?page=../admin/editabout&aboutID=<?php echo 
         $find_rs['Breed_ID']; ?>" title="Edit cat breed"><i class="fa fa-edit fa-
         2x"></i></a>
