@@ -36,7 +36,7 @@
                         if(isset($_SESSION['admin'])) {
                         ?>
                         
-                        <a href="index.php?page=../admin/new_quote" title="Add a quote"><i class="fa fa-plus fa-2x"></i></a>
+                        <a href="index.php?page=../admin/new_breed" title="Add a Breed"><i class="fa fa-plus fa-2x"></i></a>
                         
                         &nbsp; &nbsp;
                         <a href="index.php?page=../admin/logout" title="Log out"><i class="fa fa-sign-out fa-2x"></i></a>

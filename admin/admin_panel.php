@@ -24,7 +24,7 @@ if (isset($_SESSION['admin'])) {
 ?>
 <h1>Admin Panel</h1>
 <p>
-    To <a href="index.php?page=../admin/new_quote">add a cat breed</a>, use the precending link
+    To <a href="index.php?page=../admin/new_breed">add a cat breed</a>, use the precending link
     or the '+' symbol at the top right of the page. 
 </p>
 
