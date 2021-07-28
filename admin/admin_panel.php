@@ -37,9 +37,7 @@ if (isset($_SESSION['admin'])) {
 <h2>Cat Breeds...</h2>
 
 <p>
-    Either <a href="index.php?page=../admin/add_about">Add a Cat Breed</a>
-    or choose an cat breed from the dropdown list below to edit / delete an existing 
-    cat breed.
+    Choose a cat breed from the dropdown list below to edit / delete it.
 </p>
 
 <form method="post" enctype="multipart/form-data" action="<?php 
