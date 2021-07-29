@@ -27,33 +27,6 @@ include("get_about.php");
         <?php echo $full_name ?> - About
     </h2>
 
-    <?php
-
-    // if logged in, show edit / delete options... 
-    if (isset($_SESSION['admin'])) {
-
-        ?>
-
-        <div class="edit-tools">
-
-        <!-- display edit symbol for cat breed -->
-        <a href="index.php?page=../admin/editabout&aboutID=<?php echo 
-        $find_rs['Breed_ID']; ?>" title="Edit cat breed"><i class="fa fa-edit fa-
-        2x"></i></a>
-
-        &nbsp; &nbsp;
-
-        <a href="index.php?page=../admin/deleteabout_confirm&ID=<?php echo 
-        $find_rs['Breed_ID']; ?>" title="Delete cat breed"><i class="fa fa-trash fa-
-        2x"></i></a>
-        
-        </div> <!-- cat edit tools -->
-
-        <?php
-
-    } //  end edit cat tools
-
-?>
 
 </div> <!-- / about cat div -->
 
