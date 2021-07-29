@@ -151,9 +151,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
 
         // get quote ID for next page
-        $get_quote_sql = "SELECT * FROM `quotes` WHERE `Quote` = '$quote'";
-        $get_quote_query = mysqli_query($dbconnect, $get_quote_sql);
-        $get_quote_rs = mysqli_fetch_assoc($get_quote_query);
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$quote'";
+        $get_breed_query = mysqli_query($dbconnect, $get_quote_sql);
+        $get_breed_rs = mysqli_fetch_assoc($get_quote_query);
 
         $quote_ID = $get_quote_rs['ID'];
         $_SESSION['Quote_Success']=$quote_ID;
