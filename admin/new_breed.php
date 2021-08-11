@@ -145,18 +145,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $about_ID = $new_aboutID;
         }
+        
 
       // add entry to database
         $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES (NULL, '$breed_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
 
         // get quote ID for next page
-        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$quote'";
-        $get_breed_query = mysqli_query($dbconnect, $get_quote_sql);
-        $get_breed_rs = mysqli_fetch_assoc($get_quote_query);
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$breed'";
+        $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
+        $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
-        $quote_ID = $get_quote_rs['ID'];
-        $_SESSION['Quote_Success']=$quote_ID;
+        $breed_ID = $get_breed_rs['ID'];
+        $_SESSION['Breed_Success']=$breed_ID;
 
         // Go to success page...
         header('Location: index.php?page=quote_success');
@@ -177,62 +178,80 @@ else {
 
 // ?>
 
-<h1>Add Quote...</h1>
+<h1>Add Cat Breed...</h1>
 
 <form autocomplete="off" method="post" action="<?php 
 echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
 
-    <?php
-    // fields to add new author information
+        <!-- Cat Breed Name, required -->
 
-    if ($author_ID=="unknown") {
-        ?>
-        <!-- Author's first name, optional -->
-        <input class="add-field" type="text" name="first" value="<?php echo 
-        $first; ?>" placeholder="Author's First Name" />
-
-        <br /> <br />
-
-        <input class="add-field" type="text" name="middle" value="<?php echo 
-        $middle ?>" placeholder="Author's Middle Name (optional)" />
-
-        <br /> <br />
-
-        <div class="<?php echo $last_error; ?>">
-            Author's last name can't be blank
+        <div class="<?php echo $breed_error; ?>">
+            Cat breed name can't be blank
         </div>
 
-        <input class="add-field" <?php echo $last_field; ?> type="text"
-        name="last" value="<?php echo $last; ?>" placeholder="Author's Last Name"
-        />
+        <input class="add-field" type="text" name="breed" value="<?php echo 
+        $breed; ?>" placeholder="Cat Breed Name" />
 
         <br /> <br />
 
-        <select class="adv gender <?php echo $gender_field; ?>" name="gender">
+        <input class="add-field" type="text" name="alt-name" value="<?php echo 
+        $altbreedname ?>" placeholder="Alternate Cat Breed Name (optional)" />
+
+        <br /> <br />
+
+        <select class="adv type <?php echo $fur_field; ?>" name="fur">
 
             <?php 
-            if($gender_code=="") {
+            if($fur_code=="") {
                 ?>
-                <option value="" selected>Gender (Choose something)...
+                <option value="" selected>Fur Type (Choose something)...
                 </option>
                 <?php
-            } // end gender not chose if
+            } // end fur not chose if
 
             else {
                 ?>
-                    <option value="<?php echo $gender_code; ?>" selected>
-                    <?php echo $gender; ?>
+                    <option value="<?php echo $fur_code; ?>" selected>
+                    <?php echo $fur; ?>
                     </option>
 
                 <?php
-            } //  end gender chosen else
+            } //  end fur chosen else
             ?>
-            <option value="F">Female</option>
-            <option value="M">Male</option>
+            <option value="Bald">Bald (no fur)</option>
+            <option value="Long">Long Fur</option>
+            <option value="Medium">Medium Fur</option>
+            <option value="Short">Short Fur</option>
         
         </select>
 
         <br /> <br />
+
+        <select class="adv type <?php echo $lapcat_field; ?>" name="lapcat">
+
+            <?php 
+            if($lapcat_code=="") {
+                ?>
+                <option value="" selected>Lap Cat? (Choose something)...
+                </option>
+                <?php
+            } // end lapcat not chose if
+
+            else {
+                ?>
+                    <option value="<?php echo $lapcat_code; ?>" selected>
+                    <?php echo $lapcat; ?>
+                    </option>
+
+                <?php
+            } //  end fur chosen else
+            ?>
+            <option value="Lap">Lap (cat likes company)</option>
+            <option value="Non Lap">Non-Lap (cat is solitary)</option>
+            <option value="Rodent">Rodent</option>
+            <option value="Generic">Generic (likes company and is solitary)</option>
+        
+        </select>
         
         <div class="<?php echo $yob_error; ?>">
             Please enter a valid year of birth (modern author's only).
@@ -280,7 +299,6 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
 
         <?php
 
-    } // end new author fields
 
 
     ?>
