@@ -77,7 +77,7 @@ do {
     <p>
         <?php
         // show lap type....
-        fur_lap($dbconnect, $fur, "Lap Cat Type", "lapcat", "LapCat_ID", 
+        fur_lap($dbconnect, $lapcat, "Lap Cat Type", "lapcat", "LapCat_ID", 
         "LapCat")
         ?>
     </p>
