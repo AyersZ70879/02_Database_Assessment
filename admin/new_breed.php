@@ -5,16 +5,14 @@ if (isset($_SESSION['admin'])) {
 
     $about_ID = $_SESSION['Add_Breed'];
 
-    if($about_ID=="unknown") {
-        // get lap cat, fur and temprament lists from database
-        $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
-        $all_lapcat = autocomplete_list($dbconnect, $all_lapcat_sql, 'LapCat');
+    // get lap cat, fur and temprament lists from database
+    $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
+    $all_lapcat = autocomplete_list($dbconnect, $all_lapcat_sql, 'LapCat');
 
-        $all_fur_sql="SELECT * FROM `fur`ORDER BY `Fur` ASC ";
-        $all_fur = autocomplete_list($dbconnect, $all_fur_sql, 'Fur');
+    $all_fur_sql="SELECT * FROM `fur` ORDER BY `Fur` ASC ";
+    $all_fur = autocomplete_list($dbconnect, $all_fur_sql, 'Fur');
 
-    }
-
+    
     // // initialise author variables
     $breed = "";
     $altbreedname = "";
