@@ -248,102 +248,73 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
             ?>
             <option value="Lap">Lap (cat likes company)</option>
             <option value="Non Lap">Non-Lap (cat is solitary)</option>
-            <option value="Rodent">Rodent</option>
+            <option value="Rodent">Rodent (it is a rodent)</option>
             <option value="Generic">Generic (likes company and is solitary)</option>
         
         </select>
         
-        <div class="<?php echo $yob_error; ?>">
-            Please enter a valid year of birth (modern author's only).
-        </div>
-
-        <input class="add-field <?php echo $yob_field; ?>" type="text" name="yob"
-        value="<?php echo $yob; ?>" placeholder="Author's year of birth" />
-
         <br /> <br />
 
-        <div class="<?php echo $country_1_error; ?>">
-            Please enter at least one country
+    <!-- Male Weight in add entry - Required -->
+    <div class="<?php echo $maleweight_error; ?>">
+        This field can't be blank
+    </div>
+
+    <textarea class="add-field <?php echo $maleweight_field?>" name="maleweight" rows="6"><?php echo $maleweight; ?></textarea>
+
+    <br /> <br />
+
+    <!-- Avg Kitten Price in add entry - Required -->
+    <div class="<?php echo $kittenprice_error; ?>">
+        This field can't be blank
+    </div>
+
+    <textarea class="add-field <?php echo $kittenprice_field?>" name="kittenprice" rows="6"><?php echo $kittenprice; ?></textarea>
+
+    <br /> <br />
+
+        <div class="<?php echo $temprament_1_error; ?>">
+            Please enter at least two tempraments for the cat breed
         </div>
 
         <div class="autocomplete">
-            <input class="<?php $country_1_field; ?>" id="country1" type="text"
-            name="country1" value="<?php echo $country_1; ?>" placeholder="Country 1 (Required, Start Typing)...">
+            <input class="<?php $temprament_1_field; ?>" id="temprament1" type="text"
+            name="temprament1" value="<?php echo $temprament_1; ?>" placeholder="Temprament 1 (Required, Start Typing)...">
         </div>
 
         <br /> <br />
+        
+        <div class="<?php echo $temprament_2_error; ?>">
+            Please enter at least two tempraments for the cat breed
+        </div>
 
         <div class="autocomplete">
-            <input id="country2" type="text" name="country2" value="<?php echo $country_2; ?>"
-            placeholder="Country 2 (Start Typing)...">
+            <input id="temprament2" type="text" name="temprament2" value="<?php echo $temprament_2; ?>"
+            placeholder="Temprament 2 (Start Typing)...">
         </div> 
 
         <br /> <br />
 
-        <div class="<?php echo $occupation_1_error; ?>">
-            Please enter at least one country
-        </div>
-
         <div class="autocomplete">
-            <input class="<?php echo $occupation_1_field; ?>" id="occupation1" type="text"
-            name="occupation1" value="<?php echo $occupation_1; ?>" placeholder="Occupation 1 (Required, Start Typing)...">
-        </div>
+            <input id="temprament3" type="text" name="temprament3" value="<?php echo $temprament_3; ?>"
+            placeholder="Temprament 3 (Start Typing)...">
+        </div> 
+
         <br /> <br />
 
         <div class="autocomplete">
-            <input type="text" id="occupation2" name="occupation2" value="<?php echo $occupation_2; ?>"
-            placeholder="Occupation 2 (Start Typing...)">
-        </div>
+            <input id="temprament4" type="text" name="temprament4" value="<?php echo $temprament_4; ?>"
+            placeholder="Temprament 4 (Start Typing)...">
+        </div> 
 
         <br /> <br />
 
-        <?php
+        <div class="autocomplete">
+            <input id="temprament5" type="text" name="temprament5" value="<?php echo $temprament_5; ?>"
+            placeholder="Temprament 5 (Start Typing)...">
+        </div> 
 
-
-
-    ?>
-
-    <!-- Quote text area -->
-
-    <!-- Quote entry in add entry - Required -->
-    <div class="<?php echo $quote_error; ?>">
-        This field can't be blank
-    </div>
-
-    <textarea class="add-field <?php echo $quote_field?>" name="quote" rows="6"><?php echo $quote; ?></textarea>
-
-    <!-- Notes section in add entry -->
-    <input class="add-field <?php echo $notes; ?>" type="text" name="notes" value="<?php
-    echo $notes; ?>" placeholder="Notes (optional) ..."/>
-    <br /> <br />
-
-    <!-- Subject 1 entry in add entry - Required -->
-    <div class="<?php echo $tag_1_error; ?>">
-        Please enter at least one subject tag
-    </div>
-    <div class="autocomplete">
-        <input class="<?php echo $tag_1_field; ?>" id="subject1" type="text" name="Subject_1" 
-        value="<?php echo $tag_1; ?>" placeholder="Subject 1 (Start Typing...)">
-    </div>
-
-     <br /> <br />
-
-    <!-- Subject 2 entry in add entry -->
-    <div class="autocomplete">
-    
-        <input id="subject2" type="text" name="Subject_2" value="<?php echo $tag_2; ?>"
-        placeholder="Subject 2 (Start Typing, optional)...">
-    </div>
-
-    <br /> <br />
-
-    <!-- Subject 3 entry in add entry -->
-    <div class="autocomplete">
-    
-        <input id="subject3" type="text" name="Subject_3" placeholder="Subject 3 (Start Typing, optional)...">
-    </div> 
-
-    <br /> <br />
+        <br /> <br />
 
     <!-- Submit Button -->
     <p>
@@ -359,29 +330,11 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
 
 /* Arrays containing lists */
 var all_tags = <?php print("$all_subjects"); ?>;
-autocomplete(document.getElementById("subject1"), all_tags);
-autocomplete(document.getElementById("subject2"), all_tags);
-autocomplete(document.getElementById("subject3"), all_tags);
-
-<?php
-
-    if ($author_ID == "unknown"){
-
-    ?>
-
-    var all_countries = <?php print("$all_countries"); ?>;
-    autocomplete(document.getElementById("country1"), all_countries);
-    autocomplete(document.getElementById("country2"), all_countries);
-
-    var all_occupations = <?php print("$all_occupations"); ?>;
-    autocomplete(document.getElementById("occupation1"), all_occupations);
-    autocomplete(document.getElementById("occupation2"), all_occupations);
-
-
-        <?php
-    } // end author unknown if
-
-    ?>
+autocomplete(document.getElementById("temprament1"), all_tags);
+autocomplete(document.getElementById("temprament2"), all_tags);
+autocomplete(document.getElementById("temprament3"), all_tags);
+autocomplete(document.getElementById("temprament4"), all_tags);
+autocomplete(document.getElementById("temprament5"), all_tags);
 
 
 </script>
