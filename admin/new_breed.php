@@ -40,7 +40,7 @@ if (isset($_SESSION['admin'])) {
     $all_tags_sql = "SELECT * FROM `temprament` ORDER BY `Temprament` ASC";
     $all_temprament = autocomplete_list($dbconnect, $all_tags_sql, 'Temprament');
 
-$has_errors = "no";
+    $has_errors = "no";
 
 
 // Code below excutes when the form is submitted...
@@ -188,7 +188,7 @@ else {
 <h1>Add Cat Breed...</h1>
 
 <form autocomplete="off" method="post" action="<?php 
-echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
+echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
 
         <!-- Cat Breed Name, required -->
 
@@ -196,7 +196,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
             Cat breed name can't be blank
         </div>
 
-        <input class="add-field" type="text" name="breed" value="<?php echo 
+        <input class="add-field" <?php echo $breed_field; ?> type="text" name="breed" value="<?php echo 
         $breed; ?>" placeholder="Cat Breed Name" />
 
         <br /> <br />
@@ -269,7 +269,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
         This field can't be blank
     </div>
 
-    <input class="add-field" type="text" name="maleweight" value="<?php echo 
+    <input class="add-field" <?php echo $maleweight_field; ?> type="text" name="maleweight" value="<?php echo 
         $maleweight; ?>" placeholder="Average Male Cat Weight (kg)" />
     <br /> <br />
 
@@ -278,7 +278,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
         This field can't be blank
     </div>
 
-    <input class="add-field" type="text" name="kittenprice" value="<?php echo 
+    <input class="add-field" <?php echo $kittenprice_field; ?> type="text" name="kittenprice" value="<?php echo 
         $kittenprice; ?>" placeholder="Average Kitten Price ($)" />
     <br /> <br />
     <br /> <br />
