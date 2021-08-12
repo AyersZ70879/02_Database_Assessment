@@ -3,7 +3,6 @@
 // check if user is logged in 
 if (isset($_SESSION['admin'])) {
 
-    $about_ID = $_SESSION['Add_Breed'];
 
     // get lap cat, fur and temprament lists from database
     $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
@@ -37,11 +36,19 @@ if (isset($_SESSION['admin'])) {
     $breed_field = $maleweight_field = $kittenprice_field = "form-ok";
     $lapcat_field = $fur_field = $temprament_1_field = $temprament_2_field = "tag-ok";
 
+    // Get temprament list from database
+    $all_tags_sql = "SELECT * FROM `temprament` ORDER BY `Temprament` ASC";
+    $all_temprament = autocomplete_list($dbconnect, $all_tags_sql, 'Temprament');
+
+$has_errors = "no";
+
+
 // Code below excutes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //  if breed is unknown, get values from about part of form
     if($about_ID=="unknown") {
+
         $breed = mysqli_real_escape_string($dbconnect, $_POST['breed']);
         $altbreedname = mysqli_real_escape_string($dbconnect, $_POST['altbreedname']);
         $maleweight = mysqli_real_escape_string($dbconnect, $_POST['maleweight']);
@@ -108,7 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-        // get country and occupation IDs
+
+    } // end getting about values if 
+
+    if($has_errors != "yes") {
+
+        // get all IDs
         $lapcat_ID = get_ID($dbconnect, 'lapcat', 'LapCat_ID', 'LapCat', $lapcat);
         $fur_ID = get_ID($dbconnect, 'fur', 'Fur_ID', 'Fur', $fur);
 
@@ -118,9 +130,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_4 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_4);
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
 
-    } // end getting about values if 
-
-    if($has_errors != "yes") {
 
         // add cat breed to database if we have a new breed
         if ($about_ID=="unknown")
@@ -196,6 +205,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
         $altbreedname ?>" placeholder="Alternate Cat Breed Name (optional)" />
 
         <br /> <br />
+        <br /> <br />
 
         <select class="adv type <?php echo $fur_field; ?>" name="fur">
 
@@ -252,14 +262,15 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
         </select>
         
         <br /> <br />
+        <br /> <br />
 
     <!-- Male Weight in add entry - Required -->
     <div class="<?php echo $maleweight_error; ?>">
         This field can't be blank
     </div>
 
-    <textarea class="add-field <?php echo $maleweight_field?>" name="maleweight" rows="6"><?php echo $maleweight; ?></textarea>
-
+    <input class="add-field" type="text" name="maleweight" value="<?php echo 
+        $maleweight; ?>" placeholder="Average Male Cat Weight (kg)" />
     <br /> <br />
 
     <!-- Avg Kitten Price in add entry - Required -->
@@ -267,8 +278,9 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
         This field can't be blank
     </div>
 
-    <textarea class="add-field <?php echo $kittenprice_field?>" name="kittenprice" rows="6"><?php echo $kittenprice; ?></textarea>
-
+    <input class="add-field" type="text" name="kittenprice" value="<?php echo 
+        $kittenprice; ?>" placeholder="Average Kitten Price ($)" />
+    <br /> <br />
     <br /> <br />
 
         <div class="<?php echo $temprament_1_error; ?>">
@@ -288,7 +300,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
 
         <div class="autocomplete">
             <input id="temprament2" type="text" name="temprament2" value="<?php echo $temprament_2; ?>"
-            placeholder="Temprament 2 (Start Typing)...">
+            placeholder="Temprament 2 (Required, Start Typing)...">
         </div> 
 
         <br /> <br />
@@ -327,12 +339,11 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>">
 <?php include("autocomplete.php"); ?>
 
 /* Arrays containing lists */
-var all_tags = <?php print("$all_subjects"); ?>;
+var all_tags = <?php print("$all_temprament"); ?>;
 autocomplete(document.getElementById("temprament1"), all_tags);
 autocomplete(document.getElementById("temprament2"), all_tags);
 autocomplete(document.getElementById("temprament3"), all_tags);
 autocomplete(document.getElementById("temprament4"), all_tags);
 autocomplete(document.getElementById("temprament5"), all_tags);
-
 
 </script>
