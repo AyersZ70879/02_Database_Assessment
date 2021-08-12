@@ -12,7 +12,7 @@ if (isset($_SESSION['admin'])) {
     $all_fur = autocomplete_list($dbconnect, $all_fur_sql, 'Fur');
 
     
-    // // initialise author variables
+    // // initialise variables for all needed information
     $breed = "";
     $altbreedname = "";
     $maleweight = "";
@@ -46,77 +46,71 @@ if (isset($_SESSION['admin'])) {
 // Code below excutes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    //  if breed is unknown, get values from about part of form
-    if($about_ID=="unknown") {
+    $breed = mysqli_real_escape_string($dbconnect, $_POST['breed']);
+    $altbreedname = mysqli_real_escape_string($dbconnect, $_POST['altbreedname']);
+    $maleweight = mysqli_real_escape_string($dbconnect, $_POST['maleweight']);
+    $kittenprice = mysqli_real_escape_string($dbconnect, $_POST['kittenprice']);
 
-        $breed = mysqli_real_escape_string($dbconnect, $_POST['breed']);
-        $altbreedname = mysqli_real_escape_string($dbconnect, $_POST['altbreedname']);
-        $maleweight = mysqli_real_escape_string($dbconnect, $_POST['maleweight']);
-        $kittenprice = mysqli_real_escape_string($dbconnect, $_POST['kittenprice']);
+    $lapcat = mysqli_real_escape_string($dbconnect, $_POST['lapcat']);
 
-        $lapcat = mysqli_real_escape_string($dbconnect, $_POST['lapcat']);
+    $fur = mysqli_real_escape_string($dbconnect, $_POST['fur']);
+    $temprament_1 = mysqli_real_escape_string($dbconnect, $_POST['temprament1']);
+    $temprament_2 = mysqli_real_escape_string($dbconnect, $_POST['temprament2']);
+    $temprament_3 = mysqli_real_escape_string($dbconnect, $_POST['temprament3']);
+    $temprament_4 = mysqli_real_escape_string($dbconnect, $_POST['temprament4']);
+    $temprament_5 = mysqli_real_escape_string($dbconnect, $_POST['temprament5']);
 
-        $fur = mysqli_real_escape_string($dbconnect, $_POST['fur']);
-        $temprament_1 = mysqli_real_escape_string($dbconnect, $_POST['temprament1']);
-        $temprament_2 = mysqli_real_escape_string($dbconnect, $_POST['temprament2']);
-        $temprament_3 = mysqli_real_escape_string($dbconnect, $_POST['temprament3']);
-        $temprament_4 = mysqli_real_escape_string($dbconnect, $_POST['temprament4']);
-        $temprament_5 = mysqli_real_escape_string($dbconnect, $_POST['temprament5']);
+    // Error checking goes here
+    
+    // check breed name is not blank
+    if ($breed == "") {
+        $has_errors = "yes";
+        $breed_error = "error-text";
+        $breed_field = "tag-error";
+    }
 
-        // Error checking goes here
-        
-        // check breed name is not blank
-        if ($breed == "") {
-            $has_errors = "yes";
-            $breed_error = "error-text";
-            $breed_field = "tag-error";
-        }
+    // check male weight is not blank
+    if (!ctype_digit($maleweight) || $maleweight < 1) {
+        $has_errors = "yes";
+        $maleweight_error = "error-text";
+        $maleweight_field = "tag-error";
+    }
 
-        // check male weight is not blank
-        if ($maleweight == "") {
-            $has_errors = "yes";
-            $maleweight_error = "error-text";
-            $maleweight_field = "tag-error";
-        }
+    // check kitten price is not blank
+    if (!ctype_digit($kittenprice) || $kittenprice < 1) {
+        $has_errors = "yes";
+        $kittenprice_error = "error-text";
+        $kittenprice_field = "tag-error";
+    }
 
-        // check kitten price is not blank
-        if ($kittenprice == "") {
-            $has_errors = "yes";
-            $kittenprice_error = "error-text";
-            $kittenprice_field = "tag-error";
-        }
+    // check lap cat is not blank
+    if ($lapcat == "") {
+        $has_errors = "yes";
+        $lapcat_error = "error-text";
+        $lapcat_field = "tag-error";
+    }
 
-        // check lap cat is not blank
-        if ($lapcat == "") {
-            $has_errors = "yes";
-            $lapcat_error = "error-text";
-            $lapcat_field = "tag-error";
-        }
+    // check fur type is not blank
+    if ($fur == "") {
+        $has_errors = "yes";
+        $fur_error = "error-text";
+        $fur_field = "tag-error";
+    }
 
-        // check fur type is not blank
-        if ($fur == "") {
-            $has_errors = "yes";
-            $fur_error = "error-text";
-            $fur_field = "tag-error";
-        }
+    // check temprament 1 is not blank
+    if ($temprament_1 == "") {
+        $has_errors = "yes";
+        $temprament_1_error = "error-text";
+        $temprament_1_field = "tag-error";
+    }
 
-        // check temprament 1 is not blank
-        if ($temprament_1 == "") {
-            $has_errors = "yes";
-            $temprament_1_error = "error-text";
-            $temprament_1_field = "tag-error";
-        }
+    // check temprament is not blank
+    if ($temprament_2 == "") {
+        $has_errors = "yes";
+        $temprament_2_error = "error-text";
+        $temprament_2_field = "tag-error";
+    }
 
-        // check temprament is not blank
-        if ($temprament_2 == "") {
-            $has_errors = "yes";
-            $temprament_2_error = "error-text";
-            $temprament_2_field = "tag-error";
-        }
-
-
-
-    } // end getting about values if 
 
     if($has_errors != "yes") {
 
@@ -131,27 +125,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
 
 
-        // add cat breed to database if we have a new breed
-        if ($about_ID=="unknown")
-        {
-            // add breed to database
-            $add_about_sql = "INSERT INTO `about` 
-            (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWeightKg`, 
-            `AvgKittenPrice`) 
-            VALUES (NULL, '$breed', '$altbreedname', '$lapcat_ID', '$fur_ID', 
-            '$maleweight', '$kittenprice');";
-            $add_about_query = mysqli_query($dbconnect, $add_about_sql);
-            
-            // Get About ID
-            $find_about_sql = "SELECT * FROM `about` WHERE `Breed` = '$breed'";
-            $find_about_query = mysqli_query($dbconnect, $find_about_sql);
-            $find_about_rs = mysqli_fetch_assoc($find_about_query);
+        
+        // add breed to database
+        $add_about_sql = "INSERT INTO `about` 
+        (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWeightKg`, 
+        `AvgKittenPrice`) 
+        VALUES (NULL, '$breed', '$altbreedname', '$lapcat_ID', '$fur_ID', 
+        '$maleweight', '$kittenprice');";
+        $add_about_query = mysqli_query($dbconnect, $add_about_sql);
+        
+        // Get About ID
+        $find_about_sql = "SELECT * FROM `about` WHERE `Breed` = '$breed'";
+        $find_about_query = mysqli_query($dbconnect, $find_about_sql);
+        $find_about_rs = mysqli_fetch_assoc($find_about_query);
 
-            $new_aboutID = $find_about_rs['Breed_ID'];
-            echo "New Breed ID:".$new_aboutID;
+        $new_aboutID = $find_about_rs['Breed_ID'];
+        echo "New Breed ID:".$new_aboutID;
 
-            $about_ID = $new_aboutID;
-        }
+        $about_ID = $new_aboutID;
+        
         
 
       // add entry to database
@@ -167,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['Breed_Success']=$breed_ID;
 
         // Go to success page...
-        header('Location: index.php?page=quote_success');
+        header('Location: index.php?page=add_success');
 
 
     } // end has errors if
@@ -191,41 +183,27 @@ else {
 echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
 
         <!-- Cat Breed Name, required -->
-
         <div class="<?php echo $breed_error; ?>">
             Cat breed name can't be blank
         </div>
 
-        <input class="add-field" <?php echo $breed_field; ?> type="text" name="breed" value="<?php echo 
+        <input class="add-field <?php echo $breed_field; ?>" type="text" name="breed" value="<?php echo 
         $breed; ?>" placeholder="Cat Breed Name" />
 
         <br /> <br />
 
-        <input class="add-field" type="text" name="alt-name" value="<?php echo 
+        <input class="add-field" type="text" name="altbreedname" value="<?php echo 
         $altbreedname ?>" placeholder="Alternate Cat Breed Name (optional)" />
 
         <br /> <br />
         <br /> <br />
 
-        <select class="adv type <?php echo $fur_field; ?>" name="fur">
+        <select class="add-field adv type <?php echo $fur_field; ?>" name="fur">
 
-            <?php 
-            if($fur_code=="") {
-                ?>
-                <option value="" selected>Fur Type (Choose something)...
-                </option>
-                <?php
-            } // end fur not chose if
-
-            else {
-                ?>
-                    <option value="<?php echo $fur_code; ?>" selected>
-                    <?php echo $fur; ?>
-                    </option>
-
-                <?php
-            } //  end fur chosen else
-            ?>
+            
+            
+            <option value="" selected>Fur Type (Choose something)...
+            </option>
             <option value="Bald">Bald (no fur)</option>
             <option value="Long">Long Fur</option>
             <option value="Medium">Medium Fur</option>
@@ -235,7 +213,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
 
         <br /> <br />
 
-        <select class="adv type <?php echo $lapcat_field; ?>" name="lapcat">
+        <select class="add-field adv type <?php echo $lapcat_field; ?>" name="lapcat">
 
             <?php 
             if($lapcat_code=="") {
@@ -266,19 +244,19 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
 
     <!-- Male Weight in add entry - Required -->
     <div class="<?php echo $maleweight_error; ?>">
-        This field can't be blank
+        This field can't be blank, please enter a valid integer
     </div>
 
-    <input class="add-field" <?php echo $maleweight_field; ?> type="text" name="maleweight" value="<?php echo 
+    <input class="add-field <?php echo $maleweight_field; ?>" type="text" name="maleweight" value="<?php echo 
         $maleweight; ?>" placeholder="Average Male Cat Weight (kg)" />
     <br /> <br />
 
     <!-- Avg Kitten Price in add entry - Required -->
     <div class="<?php echo $kittenprice_error; ?>">
-        This field can't be blank
+        This field can't be blank, please enter a valid integer
     </div>
 
-    <input class="add-field" <?php echo $kittenprice_field; ?> type="text" name="kittenprice" value="<?php echo 
+    <input class="add-field <?php echo $kittenprice_field; ?>" type="text" name="kittenprice" value="<?php echo 
         $kittenprice; ?>" placeholder="Average Kitten Price ($)" />
     <br /> <br />
     <br /> <br />
@@ -288,7 +266,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         </div>
 
         <div class="autocomplete">
-            <input class="<?php $temprament_1_field; ?>" id="temprament1" type="text"
+            <input class="add-field <?php $temprament_1_field; ?>" id="temprament1" type="text"
             name="temprament1" value="<?php echo $temprament_1; ?>" placeholder="Temprament 1 (Required, Start Typing)...">
         </div>
 
@@ -299,28 +277,28 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         </div>
 
         <div class="autocomplete">
-            <input id="temprament2" type="text" name="temprament2" value="<?php echo $temprament_2; ?>"
+            <input class="add-field <?php $temprament_1_field; ?>" id="temprament2" type="text" name="temprament2" value="<?php echo $temprament_2; ?>"
             placeholder="Temprament 2 (Required, Start Typing)...">
         </div> 
 
         <br /> <br />
 
         <div class="autocomplete">
-            <input id="temprament3" type="text" name="temprament3" value="<?php echo $temprament_3; ?>"
+            <input class="add-field" id="temprament3" type="text" name="temprament3" value="<?php echo $temprament_3; ?>"
             placeholder="Temprament 3 (Start Typing)...">
         </div> 
 
         <br /> <br />
 
         <div class="autocomplete">
-            <input id="temprament4" type="text" name="temprament4" value="<?php echo $temprament_4; ?>"
+            <input class="add-field" id="temprament4" type="text" name="temprament4" value="<?php echo $temprament_4; ?>"
             placeholder="Temprament 4 (Start Typing)...">
         </div> 
 
         <br /> <br />
 
         <div class="autocomplete">
-            <input id="temprament5" type="text" name="temprament5" value="<?php echo $temprament_5; ?>"
+            <input class="add-field" id="temprament5" type="text" name="temprament5" value="<?php echo $temprament_5; ?>"
             placeholder="Temprament 5 (Start Typing)...">
         </div> 
 
