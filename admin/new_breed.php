@@ -117,7 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($has_errors != "yes") {
 
         // get all IDs
-        $breed_ID = get_ID($dbconnect, 'breeds', 'Breed_ID', 'Breed', $breed);
         $lapcat_ID = get_ID($dbconnect, 'lapcat', 'LapCat_ID', 'LapCat', $lapcat_code);
         $fur_ID = get_ID($dbconnect, 'fur', 'Fur_ID', 'Fur', $fur_code);
         $temprament_ID_1 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_1);
@@ -142,14 +141,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $new_aboutID = $find_about_rs['Breed_ID'];
         $about_ID = $new_aboutID;
+
+        echo $about_ID;
         
       // add entry to database
         $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`)
-         VALUES (NULL, '$breed_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
+         VALUES (NULL, '$about_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
 
         // get quote ID for next page
-        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$breed'";
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$about_ID'";
         $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
         $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
