@@ -117,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($has_errors != "yes") {
 
         // get all IDs
+        $breed_ID = get_ID($dbconnect, 'breeds', 'Breed_ID', 'Breed', $breed);
         $lapcat_ID = get_ID($dbconnect, 'lapcat', 'LapCat_ID', 'LapCat', $lapcat_code);
         $fur_ID = get_ID($dbconnect, 'fur', 'Fur_ID', 'Fur', $fur_code);
         $temprament_ID_1 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_1);
