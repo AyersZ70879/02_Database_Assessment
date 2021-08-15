@@ -126,10 +126,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
 
 
-        
         // add breed to database
         $add_about_sql = "INSERT INTO `about` 
-        (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWeightKg`, 
+        (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWtKg`, 
         `AvgKittenPrice`) 
         VALUES (NULL, '$breed', '$altbreedname', '$lapcat_ID', '$fur_ID', 
         '$maleweight', '$kittenprice');";
@@ -141,14 +140,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $find_about_rs = mysqli_fetch_assoc($find_about_query);
 
         $new_aboutID = $find_about_rs['Breed_ID'];
-        echo "New Breed ID:".$new_aboutID;
-
         $about_ID = $new_aboutID;
         
-        
-
       // add entry to database
-        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES (NULL, '$breed_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
+        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`)
+         VALUES (NULL, '$breed_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
 
         // get quote ID for next page
