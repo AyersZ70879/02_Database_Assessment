@@ -277,6 +277,14 @@ input.tag-ok[type=text] {
     background-color: rgb(255, 255, 255);
 }
 
+select.tag-error {
+    background-color: #ff9e9e;
+}
+
+select.tag-ok {
+    background-color: rgb(255, 255, 255);
+}
+
 .form-ok {
     background-color: rgb(255, 255, 255);
 }

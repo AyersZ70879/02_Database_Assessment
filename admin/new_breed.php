@@ -18,6 +18,8 @@ if (isset($_SESSION['admin'])) {
     $maleweight = "";
     $kittenprice = "";
     $lapcat = "";
+    $lapcat_code = "";
+    $fur_code = "";
     $fur = "";
     $temprament_1 = "";
     $temprament_2 = "";
@@ -48,12 +50,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $breed = mysqli_real_escape_string($dbconnect, $_POST['breed']);
     $altbreedname = mysqli_real_escape_string($dbconnect, $_POST['altbreedname']);
+
     $maleweight = mysqli_real_escape_string($dbconnect, $_POST['maleweight']);
     $kittenprice = mysqli_real_escape_string($dbconnect, $_POST['kittenprice']);
+    $lapcat_code = mysqli_real_escape_string($dbconnect, $_POST['lapcat']);
+    $fur_code = mysqli_real_escape_string($dbconnect, $_POST['fur']);
 
-    $lapcat = mysqli_real_escape_string($dbconnect, $_POST['lapcat']);
-
-    $fur = mysqli_real_escape_string($dbconnect, $_POST['fur']);
     $temprament_1 = mysqli_real_escape_string($dbconnect, $_POST['temprament1']);
     $temprament_2 = mysqli_real_escape_string($dbconnect, $_POST['temprament2']);
     $temprament_3 = mysqli_real_escape_string($dbconnect, $_POST['temprament3']);
@@ -84,14 +86,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // check lap cat is not blank
-    if ($lapcat == "") {
+    if ($lapcat_code == "") {
         $has_errors = "yes";
         $lapcat_error = "error-text";
         $lapcat_field = "tag-error";
     }
 
     // check fur type is not blank
-    if ($fur == "") {
+    if ($fur_code == "") {
         $has_errors = "yes";
         $fur_error = "error-text";
         $fur_field = "tag-error";
@@ -115,9 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($has_errors != "yes") {
 
         // get all IDs
-        $lapcat_ID = get_ID($dbconnect, 'lapcat', 'LapCat_ID', 'LapCat', $lapcat);
-        $fur_ID = get_ID($dbconnect, 'fur', 'Fur_ID', 'Fur', $fur);
-
+        $lapcat_ID = get_ID($dbconnect, 'lapcat', 'LapCat_ID', 'LapCat', $lapcat_code);
+        $fur_ID = get_ID($dbconnect, 'fur', 'Fur_ID', 'Fur', $fur_code);
         $temprament_ID_1 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_1);
         $temprament_ID_2 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_2);
         $temprament_ID_3 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_3);
@@ -198,12 +199,29 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         <br /> <br />
         <br /> <br />
 
+        <div class="<?php echo $fur_error; ?>">
+           Fur type can't be blank
+        </div>
+
         <select class="add-field adv type <?php echo $fur_field; ?>" name="fur">
 
-            
-            
-            <option value="" selected>Fur Type (Choose something)...
-            </option>
+        <?php 
+            if($fur_code=="") {
+                ?>
+                <option value="" selected>Type of Fur (Choose something)...
+                </option>
+                <?php
+            } // end fur not chose if
+
+            else {
+                ?>
+                    <option value="<?php echo $fur_code; ?>" selected>
+                    <?php echo $fur; ?>
+                    </option>
+
+                <?php
+            } //  end fur chosen else
+            ?>
             <option value="Bald">Bald (no fur)</option>
             <option value="Long">Long Fur</option>
             <option value="Medium">Medium Fur</option>
@@ -212,6 +230,10 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         </select>
 
         <br /> <br />
+
+        <div class="<?php echo $lapcat_error; ?>">
+            Lap Cat field name can't be blank
+        </div>
 
         <select class="add-field adv type <?php echo $lapcat_field; ?>" name="lapcat">
 
