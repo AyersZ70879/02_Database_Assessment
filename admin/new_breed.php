@@ -28,8 +28,8 @@ if (isset($_SESSION['admin'])) {
     $temprament_5 = "";
 
     // // Initialise lap cat, fur and temprament ID's
-    $lapcat_ID = $fur_ID = $temprament_1_ID = $temprament_2_ID = $temprament_3_ID = 
-    $temprament_4_ID = $temprament_5_ID = 0;
+    $lapcat_ID = $fur_ID = $temprament_ID_1 = $temprament_ID_2 = $temprament_ID_3 = 
+    $temprament_ID_4 = $temprament_ID_5 = 0;
 
     // // set up error fields / visibility
     $breed_error = $maleweight_error = $kittenprice_error = 
@@ -142,11 +142,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_aboutID = $find_about_rs['Breed_ID'];
         $about_ID = $new_aboutID;
 
-        echo $about_ID;
         
       // add entry to database
-        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`)
-         VALUES (NULL, '$about_ID', '$temprament_1_ID', '$temprament_2_ID', '$temprament_3_ID', '$temprament_4_ID', '$temprament_5_ID');";
+        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES (NULL, '$about_ID', '$temprament_ID_1', '$temprament_ID_2', '$temprament_ID_3', '$temprament_ID_4', '$temprament_ID_5');";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
 
         // get quote ID for next page
@@ -157,8 +155,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $breed_ID = $get_breed_rs['ID'];
         $_SESSION['Breed_Success']=$breed_ID;
 
+        echo $breed_ID;
+
         // Go to success page...
-        header('Location: index.php?page=add_success');
+        //header('Location: index.php?page=add_success');
 
 
     } // end has errors if

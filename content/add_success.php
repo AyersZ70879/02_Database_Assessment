@@ -6,6 +6,7 @@
 
 $breed_ID=$_SESSION['Breed_Success'];
 
+
 $find_sql = "SELECT * FROM `breeds`
 JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`) WHERE `ID` = $breed_ID
 ";
