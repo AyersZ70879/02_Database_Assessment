@@ -124,12 +124,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_3 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_3);
         $temprament_ID_4 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_4);
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
+        
 
 
         // add breed to database
         $add_about_sql = "INSERT INTO `about` 
         (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWtKg`, 
-        `AvgKittenPrice`) 
+        `AvgKittenPrice`)
         VALUES (NULL, '$breed', '$altbreedname', '$lapcat_ID', '$fur_ID', 
         '$maleweight', '$kittenprice');";
         $add_about_query = mysqli_query($dbconnect, $add_about_sql);
@@ -140,12 +141,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $find_about_rs = mysqli_fetch_assoc($find_about_query);
 
         $new_aboutID = $find_about_rs['Breed_ID'];
+
+        echo "New Breed ID:".$new_aboutID;
         $about_ID = $new_aboutID;
+
 
         
       // add entry to database
-        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES (NULL, '$about_ID', '$temprament_ID_1', '$temprament_ID_2', '$temprament_ID_3', '$temprament_ID_4', '$temprament_ID_5');";
+        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES(NULL, '$about_ID', '$temprament_ID_1', '$temprament_ID_2', '$temprament_ID_3', '$temprament_ID_4', '$temprament_ID_5');";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
+
+ 
 
         // get quote ID for next page
         $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$about_ID'";
@@ -158,7 +164,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo $breed_ID;
 
         // Go to success page...
-        //header('Location: index.php?page=add_success');
+        header('Location: index.php?page=add_success');
+
+
 
 
     } // end has errors if
