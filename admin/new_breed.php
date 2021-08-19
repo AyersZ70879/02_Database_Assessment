@@ -161,8 +161,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $breed_ID = $get_breed_rs['ID'];
         $_SESSION['Breed_Success']=$breed_ID;
 
-        echo $breed_ID;
-
         // Go to success page...
         header('Location: index.php?page=add_success');
 
