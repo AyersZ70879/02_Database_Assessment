@@ -3,7 +3,7 @@
 // check if user is logged in 
 if (isset($_SESSION['admin'])) {
 
-    $breed_ID = $_REQUEST['breedID'];
+    $breed_ID = $_REQUEST['ID'];
 
     // get lap cat, fur and temprament lists from database
     $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
@@ -19,19 +19,6 @@ if (isset($_SESSION['admin'])) {
     $all_about_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = $breed_ID";
     $all_about_query = mysqli_query($dbconnect, $all_about_sql);
     $all_about_rs = mysqli_fetch_assoc($all_about_query);
-
-    $gender_code = $all_authors_rs['Gender'];
-
-    if ($gender_code=="F") {
-        $gender = "Female";
-    }
-    else if ($gender_code=="M") {
-        $gender = "Male";
-    }
-
-    else {
-        $gender = "";
-    }
 
     # Initialise all variables
     $breed = $all_breeds_rs['Breed'];
@@ -234,12 +221,13 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         <div class="<?php echo $breed_error; ?>">
             Cat breed name can't be blank
         </div>
-
+        <h3> Cat breed </h3>
         <input class="add-field <?php echo $breed_field; ?>" type="text" name="breed" value="<?php echo 
         $breed; ?>" placeholder="Cat Breed Name" />
 
         <br /> <br />
 
+        <h3>Alt cat breed name </h3>
         <input class="add-field" type="text" name="altbreedname" value="<?php echo 
         $altbreedname ?>" placeholder="Alternate Cat Breed Name (optional)" />
 
@@ -277,7 +265,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         </select>
 
         <br /> <br />
-
+    
         <div class="<?php echo $lapcat_error; ?>">
             Lap Cat field name can't be blank
         </div>
@@ -310,7 +298,8 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         
         <br /> <br />
         <br /> <br />
-
+    
+        <h3>Average Male Cat Weight (kg)</h3>
     <!-- Male Weight in add entry - Required -->
     <div class="<?php echo $maleweight_error; ?>">
         This field can't be blank, please enter a valid integer
@@ -319,6 +308,8 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
     <input class="add-field <?php echo $maleweight_field; ?>" type="text" name="maleweight" value="<?php echo 
         $maleweight; ?>" placeholder="Average Male Cat Weight (kg)" />
     <br /> <br />
+
+    <h3>Average Kitten Price ($)</h3>
 
     <!-- Avg Kitten Price in add entry - Required -->
     <div class="<?php echo $kittenprice_error; ?>">
@@ -329,6 +320,8 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
         $kittenprice; ?>" placeholder="Average Kitten Price ($)" />
     <br /> <br />
     <br /> <br />
+
+    <h3>Cat Tempraments...</h3>
 
         <div class="<?php echo $temprament_1_error; ?>">
             Please enter at least two tempraments for the cat breed
