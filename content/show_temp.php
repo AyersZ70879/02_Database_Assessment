@@ -46,7 +46,7 @@
         &nbsp; &nbsp;
 
         <a href="index.php?page=../admin/deletebreed_confirm&ID=<?php echo 
-        $find_rs['ID']; ?>" title="Delete Breed"><i class="fa fa-trash fa-2x"></i>
+        $find_rs['Breed_ID']; ?>" title="Delete Breed"><i class="fa fa-trash fa-2x"></i>
         </a>
 
         </div> <!-- / edit tools div -->
