@@ -40,7 +40,7 @@
 
         <div class="edit-tools">
 
-        <a href="index.php?page=../admin/editbreed&ID=<?php echo $find_rs['ID']; ?>"
+        <a href="index.php?page=../admin/editbreed&ID=<?php echo $find_rs['Breed_ID']; ?>"
         title="Edit Breed"><i class="fa fa-edit fa-2x"></i></a>
         
         &nbsp; &nbsp;
