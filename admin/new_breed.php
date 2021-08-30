@@ -220,7 +220,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
             else {
                 ?>
                     <option value="<?php echo $fur_code; ?>" selected>
-                    <?php echo $fur; ?>
+                    <?php echo $fur_code; ?>
                     </option>
 
                 <?php
@@ -252,7 +252,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
             else {
                 ?>
                     <option value="<?php echo $lapcat_code; ?>" selected>
-                    <?php echo $lapcat; ?>
+                    <?php echo $lapcat_code; ?>
                     </option>
 
                 <?php
