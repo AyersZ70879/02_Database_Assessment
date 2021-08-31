@@ -158,44 +158,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         // add breed to database
-        $add_about_sql = "INSERT INTO `about` 
-        (`Breed_ID`, `Breed`, `AltBreedName`, `LapCat_ID`, `Fur_ID`, `MaleWtKg`, 
-        `AvgKittenPrice`)
-        VALUES (NULL, '$breed', '$altbreedname', '$lapcat_ID', '$fur_ID', 
-        '$maleweight', '$kittenprice');";
+        $add_about_sql = "UPDATE `about` SET 
+        `Breed` = '$breed', `AltBreedName` = '$altbreedname', `LapCat_ID` = '$lapcat_code', `Fur_ID` = '$fur_code', `MaleWtKg` = '$maleweight', 
+        `AvgKittenPrice` = '$kittenprice' WHERE 
+        `about`.`Breed_ID` = $breed_ID;";
         $add_about_query = mysqli_query($dbconnect, $add_about_sql);
-        
-        // Get About ID
-        $find_about_sql = "SELECT * FROM `about` WHERE `Breed` = '$breed'";
-        $find_about_query = mysqli_query($dbconnect, $find_about_sql);
-        $find_about_rs = mysqli_fetch_assoc($find_about_query);
-
-        $new_aboutID = $find_about_rs['Breed_ID'];
-
-        echo "New Breed ID:".$new_aboutID;
-        $about_ID = $new_aboutID;
-
 
         
       // add entry to database
-        $addentry_sql = "INSERT INTO `breeds` (`ID`, `Breed_ID`, `Temprament1_ID`, `Temprament2_ID`, `Temprament3_ID`, `Temprament4_ID`, `Temprament5_ID`) VALUES(NULL, '$about_ID', '$temprament_ID_1', '$temprament_ID_2', '$temprament_ID_3', '$temprament_ID_4', '$temprament_ID_5');";
-        $addentry_query = mysqli_query($dbconnect, $addentry_sql);
-
+        $addentry_sql = "UPDATE `breeds` SET `Temprament1_ID` = '$temprament_ID_1', `Temprament2_ID` = '$temprament_ID_2', 
+        `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE 
+        `breeds`.`Breed_ID` = $breed_ID;";
+        $addentry_query = mysqli_query($dbconnect, $addentry_sql);;
  
 
         // get quote ID for next page
-        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$about_ID'";
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$breed_ID'";
         $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
         $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
-        $breed_ID = $get_breed_rs['ID'];
-        $_SESSION['Breed_Success']=$breed_ID;
+        $ID = $get_quote_rs['ID'];
+        $_SESSION['Breed_Success']=$ID;
 
         // Go to success page...
-        header('Location: index.php?page=add_success');
-
-
-
+        header('Location: index.php?page=add_success&breedID='.$ID);
 
     } // end has errors if
 
