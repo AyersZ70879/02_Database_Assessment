@@ -5,6 +5,8 @@ if (isset($_SESSION['admin'])) {
 
     $breed_ID = $_REQUEST['ID'];
 
+    echo $breed_ID;
+
     // get lap cat, fur and temprament lists from database
     $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
     $all_lapcat = autocomplete_list($dbconnect, $all_lapcat_sql, 'LapCat');
@@ -160,15 +162,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // add breed to database
         $add_about_sql = "UPDATE `about` SET 
         `Breed` = '$breed', `AltBreedName` = '$altbreedname', `LapCat_ID` = '$lapcat_code', `Fur_ID` = '$fur_code', `MaleWtKg` = '$maleweight', 
-        `AvgKittenPrice` = '$kittenprice' WHERE 
-        `about`.`Breed_ID` = $breed_ID;";
+        `AvgKittenPrice` = '$kittenprice' WHERE `about`.`Breed_ID` = $breed_ID;";
         $add_about_query = mysqli_query($dbconnect, $add_about_sql);
 
         
       // add entry to database
         $addentry_sql = "UPDATE `breeds` SET `Temprament1_ID` = '$temprament_ID_1', `Temprament2_ID` = '$temprament_ID_2', 
-        `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE 
-        `breeds`.`Breed_ID` = $breed_ID;";
+        `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE `breeds`.`Breed_ID` = $breed_ID;";
         $addentry_query = mysqli_query($dbconnect, $addentry_sql);;
  
 
@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
         $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
-        $ID = $get_quote_rs['ID'];
+        $ID = $get_breed_rs['ID'];
         $_SESSION['Breed_Success']=$ID;
 
         // Go to success page...
@@ -198,10 +198,10 @@ else {
 
 // ?>
 
-<h1>Add Cat Breed...</h1>
+<h1>Edit Cat Breed...</h1>
 
 <form autocomplete="off" method="post" action="<?php 
-echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
+echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editbreed&ID=$breed_ID");?>">
 
         <!-- Cat Breed Name, required -->
         <div class="<?php echo $breed_error; ?>">
