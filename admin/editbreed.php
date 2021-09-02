@@ -3,48 +3,45 @@
 // check if user is logged in 
 if (isset($_SESSION['admin'])) {
 
-    $breed_ID = $_REQUEST['ID'];
+$breed_ID = $_REQUEST['ID'];
 
-    echo $breed_ID;
+    // Get author ID
+    $find_sql = "SELECT * FROM `breeds`
+    JOIN about ON (`breeds`.`Breed_ID` = `about`.`Breed_ID`) WHERE `breeds`.`Breed_ID` = $breed_ID 
+    ";
 
-    // get lap cat, fur and temprament lists from database
+    $find_query = mysqli_query($dbconnect, $find_sql);
+    $find_rs = mysqli_fetch_assoc($find_query);
+
     $all_lapcat_sql="SELECT * FROM `lapcat` ORDER BY `LapCat` ASC ";
     $all_lapcat = autocomplete_list($dbconnect, $all_lapcat_sql, 'LapCat');
 
     $all_fur_sql="SELECT * FROM `fur` ORDER BY `Fur` ASC ";
     $all_fur = autocomplete_list($dbconnect, $all_fur_sql, 'Fur');
 
-    $all_breeds_sql = "SELECT * FROM `about` WHERE `Breed_ID` = $breed_ID";
-    $all_breeds_query = mysqli_query($dbconnect, $all_breeds_sql);
-    $all_breeds_rs = mysqli_fetch_assoc($all_breeds_query);
+    // Initialise all variables
+    $breed = $find_rs['Breed'];
+    $altbreedname = $find_rs['AltBreedName'];
+    $maleweight = $find_rs['MaleWtKg'];
+    $kittenprice = $find_rs['AvgKittenPrice'];
 
-    $all_about_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = $breed_ID";
-    $all_about_query = mysqli_query($dbconnect, $all_about_sql);
-    $all_about_rs = mysqli_fetch_assoc($all_about_query);
-
-    # Initialise all variables
-    $breed = $all_breeds_rs['Breed'];
-    $altbreedname = $all_breeds_rs['AltBreedName'];
-    $maleweight = $all_breeds_rs['MaleWtKg'];
-    $kittenprice = $all_breeds_rs['AvgKittenPrice'];
-
-    $lapcat_code_ID = $all_breeds_rs['LapCat_ID'];
+    $lapcat_code_ID = $find_rs['LapCat_ID'];
     $lapcat_code_rs = get_rs($dbconnect, "SELECT * FROM `lapcat` WHERE 
     `LapCat_ID` = $lapcat_code_ID");
     $lapcat_code = $lapcat_code_rs['LapCat'];
     $lapcat = $lapcat_code;
     
-    $fur_code_ID = $all_breeds_rs['Fur_ID'];
+    $fur_code_ID = $find_rs['Fur_ID'];
     $fur_code_rs = get_rs($dbconnect, "SELECT * FROM `fur` WHERE 
     `Fur_ID` = $fur_code_ID");
     $fur_code = $fur_code_rs['Fur'];
     $fur = $fur_code;
 
-    $temprament_1_ID = $all_about_rs['Temprament1_ID'];
-    $temprament_2_ID = $all_about_rs['Temprament2_ID'];
-    $temprament_3_ID = $all_about_rs['Temprament3_ID'];
-    $temprament_4_ID = $all_about_rs['Temprament4_ID'];
-    $temprament_5_ID = $all_about_rs['Temprament5_ID'];
+    $temprament_1_ID = $find_rs['Temprament1_ID'];
+    $temprament_2_ID = $find_rs['Temprament2_ID'];
+    $temprament_3_ID = $find_rs['Temprament3_ID'];
+    $temprament_4_ID = $find_rs['Temprament4_ID'];
+    $temprament_5_ID = $find_rs['Temprament5_ID'];
 
     $temprament_1_rs = get_rs($dbconnect, "SELECT * FROM `temprament` WHERE 
     `Temprament_ID` = $temprament_1_ID");
@@ -63,19 +60,18 @@ if (isset($_SESSION['admin'])) {
     $temprament_4 = $temprament_4_rs['Temprament'];
     $temprament_5 = $temprament_5_rs['Temprament'];
 
-    // set up error fields / visibility
-    $breed_error = $maleweight_error = $kittenprice_error = 
-    $lapcat_error = $fur_error = $temprament_1_error = $temprament_2_error = "no-error";
+// set up error fields / visibility
+$breed_error = $maleweight_error = $kittenprice_error = 
+$lapcat_error = $fur_error = $temprament_1_error = $temprament_2_error = "no-error";
 
-    $breed_field = $maleweight_field = $kittenprice_field = "form-ok";
-    $lapcat_field = $fur_field = $temprament_1_field = $temprament_2_field = "tag-ok";
+$breed_field = $maleweight_field = $kittenprice_field = "form-ok";
+$lapcat_field = $fur_field = $temprament_1_field = $temprament_2_field = "tag-ok";
 
-    // Get temprament list from database
-    $all_tags_sql = "SELECT * FROM `temprament` ORDER BY `Temprament` ASC";
-    $all_temprament = autocomplete_list($dbconnect, $all_tags_sql, 'Temprament');
+// Get temprament list from database
+$all_tags_sql = "SELECT * FROM `temprament` ORDER BY `Temprament` ASC";
+$all_temprament = autocomplete_list($dbconnect, $all_tags_sql, 'Temprament');
 
-    $has_errors = "no";
-    
+$has_errors = "no";
 
 // Code below excutes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -145,7 +141,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_2_field = "tag-error";
     }
 
-
     if($has_errors != "yes") {
 
         // get all IDs
@@ -156,18 +151,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_3 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_3);
         $temprament_ID_4 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_4);
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
-        
+
         // add about edit to database
-        $add_about_sql = "UPDATE `about` SET `Breed` = '$breed', `AltBreedName` = '$altbreedname', `LapCat_ID` = '$lapcat_code', `Fur_ID` = '$fur_code', `MaleWtKg` = '$maleweight', `AvgKittenPrice` = '$kittenprice' WHERE `about`.`Breed_ID` = $breed_ID;";
+        $add_about_sql = "UPDATE `about` SET `Breed` = '$breed', `AltBreedName` = '$altbreedname', `LapCat_ID` = '$lapcat_ID', `Fur_ID` = '$fur_ID', `MaleWtKg` = '$maleweight', `AvgKittenPrice` = '$kittenprice' WHERE `about`.`Breed_ID` = $breed_ID;";
         $add_about_query = mysqli_query($dbconnect, $add_about_sql);
 
         // add breed edit to database
-         $addentry_sql = "UPDATE `breeds` SET `Temprament1_ID` = '$temprament_ID_1', `Temprament2_ID` = '$temprament_ID_2', `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE `breeds`.`Breed_ID` = $breed_ID;";
-         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
+        $addentry_sql = "UPDATE `breeds` SET `Temprament1_ID` = '$temprament_ID_1', `Temprament2_ID` = '$temprament_ID_2', `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE `breeds`.`Breed_ID` = $breed_ID;";
+        $addentry_query = mysqli_query($dbconnect, $addentry_sql);
  
-
         // get quote ID for next page
-        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$breed_ID'";
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = $breed_ID";
         $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
         $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
@@ -175,7 +169,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['Breed_Success']=$ID;
 
         // Go to success page...
-        header('Location: index.php?page=add_success&breedID='.$ID);
+        header('Location: index.php?page=add_success&breed_ID='.$ID);
+
 
     } // end has errors if
 

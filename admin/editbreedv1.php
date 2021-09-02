@@ -157,23 +157,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temprament_ID_4 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_4);
         $temprament_ID_5 = get_ID($dbconnect, 'temprament', 'Temprament_ID', 'Temprament', $temprament_5);
         
-        // edit database entry
-        $editentry_sql = "UPDATE `quotes` SET `Author_ID` = '$author_ID', `Quote` = '$quote', `Notes` 
-        = '$notes', `Subject1_ID` = '$subjectID_1', `Subject2_ID` = '$subjectID_2', 
-        `Subject3_ID` = '$subjectID_3' WHERE `quotes`.`ID` = $ID;";
-        $editentry_query = mysqli_query($dbconnect, $editentry_sql);
+        // add about edit to database
+        $add_about_sql = "UPDATE `about` SET `Breed` = '$breed', `AltBreedName` = '$altbreedname', `LapCat_ID` = '$lapcat_code', `Fur_ID` = '$fur_code', `MaleWtKg` = '$maleweight', `AvgKittenPrice` = '$kittenprice' WHERE `about`.`Breed_ID` = $breed_ID;";
+        $add_about_query = mysqli_query($dbconnect, $add_about_sql);
+
+        // add breed edit to database
+         $addentry_sql = "UPDATE `breeds` SET `Temprament1_ID` = '$temprament_ID_1', `Temprament2_ID` = '$temprament_ID_2', `Temprament3_ID` = '$temprament_ID_3', `Temprament4_ID` = '$temprament_ID_4', `Temprament5_ID` = '$temprament_ID_5' WHERE `breeds`.`Breed_ID` = $breed_ID;";
+         $addentry_query = mysqli_query($dbconnect, $addentry_sql);
+ 
 
         // get quote ID for next page
-        $get_quote_sql = "SELECT * FROM `quotes` WHERE `Quote` = '$quote'";
-        $get_quote_query = mysqli_query($dbconnect, $get_quote_sql);
-        $get_quote_rs = mysqli_fetch_assoc($get_quote_query);
+        $get_breed_sql = "SELECT * FROM `breeds` WHERE `Breed_ID` = '$breed_ID'";
+        $get_breed_query = mysqli_query($dbconnect, $get_breed_sql);
+        $get_breed_rs = mysqli_fetch_assoc($get_breed_query);
 
-        $quote_ID = $get_quote_rs['ID'];
-        $_SESSION['Quote_Success']=$quote_ID;
+        $ID = $get_breed_rs['ID'];
+        $_SESSION['Breed_Success']=$ID;
 
         // Go to success page...
-        header('Location: index.php?page=editquote_success&quote_ID='.$quote_ID);
-
+        // header('Location: index.php?page=add_success&breedID='.$ID);
 
     } // end has errors if
 
