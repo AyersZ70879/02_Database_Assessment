@@ -12,7 +12,7 @@ $temp_to_find = $_REQUEST['tempID'];
 
 ?>
 
-<h2> Temprament Results (<?php echo $temp_rs['Temprament']?>) </h2>
+<h2> Temperament Results (<?php echo $temp_rs['Temprament']?>) </h2>
 
 <?php
 

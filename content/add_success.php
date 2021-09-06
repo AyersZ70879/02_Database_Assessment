@@ -13,6 +13,10 @@ JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`) WHERE `ID` = $breed_ID
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
 
+
+$lapcat = $find_rs['LapCat_ID'];
+$fur = $find_rs['Fur_ID'];
+
 // Loop through results and display them...
 do {
 
@@ -35,9 +39,26 @@ do {
         <!-- Get avg kitten price -->
         <p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
 
-        <!-- get subject tags to display -->
-        <?php include("show_temp.php"); ?>
-    
+        <!-- Get fur type -->
+        <p>
+            <?php
+            // show fur type....
+            fur_lap($dbconnect, $fur, "Fur Type", "fur", "Fur_ID", 
+            "Fur")
+            ?>
+        </p>
+
+        <!-- Get lap type -->
+        <p>
+            <?php
+            // show lap type....
+            fur_lap($dbconnect, $lapcat, "Lap Cat Type", "lapcat", "LapCat_ID", 
+            "LapCat")
+            ?>
+        </p>
+            <!-- get subject tags to display -->
+            <?php include("show_temp.php"); ?>
+        
 
 </div>
 <br />

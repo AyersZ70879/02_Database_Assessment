@@ -41,12 +41,12 @@
         <div class="edit-tools">
 
         <a href="index.php?page=../admin/editbreed&ID=<?php echo $find_rs['Breed_ID']; ?>"
-        title="Edit Breed"><i class="fa fa-edit fa-2x"></i></a>
+        title="Edit Breed" class="colour"><i class="fa fa-edit fa-2x"></i></a>
         
         &nbsp; &nbsp;
 
         <a href="index.php?page=../admin/deletebreed_confirm&ID=<?php echo 
-        $find_rs['Breed_ID']; ?>" title="Delete Breed"><i class="fa fa-trash fa-2x"></i>
+        $find_rs['Breed_ID']; ?>" class="colour" title="Delete Breed"><i class="fa fa-trash fa-2x"></i>
         </a>
 
         </div> <!-- / edit tools div -->
