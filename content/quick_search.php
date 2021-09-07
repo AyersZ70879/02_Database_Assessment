@@ -18,46 +18,11 @@ else {
     $temp_ID = "-1";
 }
 
-// Find lapcat ID
-$lap_sql = "SELECT * FROM `lapcat` WHERE `LapCat` LIKE '%$quick_find%'";
-$lap_query = mysqli_query($dbconnect, $lap_sql);
-$lap_rs = mysqli_fetch_assoc($lap_query);
 
-$lap_count = mysqli_num_rows($lap_query);
-
-if ($lap_count > 0) {
-    $lap_ID = $lap_rs['LapCat_ID'];
-}
-
-else {
-    // if this is not set query below breaks
-    $lap_ID = "-1";
-}
-
-// Find fur ID
-$fur_sql = "SELECT * FROM `fur` WHERE `Fur` LIKE '%$quick_find%'";
-$fur_query = mysqli_query($dbconnect, $fur_sql);
-$fur_rs = mysqli_fetch_assoc($fur_query);
-
-$fur_count = mysqli_num_rows($fur_query);
-
-if ($fur_count > 0) {
-    $fur_ID = $fur_rs['Fur_ID'];
-}
-
-else {
-    // if this is not set query below breaks
-    $fur_ID = "-1";
-}
-
-$lapcat = $temp_rs['LapCat_ID'];
-$fur = $temp_rs['Fur_ID'];
 
 $find_sql = "SELECT * FROM `breeds`
 JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`)
 WHERE `Breed` LIKE '%$quick_find%'
-OR `LapCat_ID` LIKE '%$quick_find%'
-OR `Fur_ID` LIKE '%$quick_find%'
 OR `Temprament1_ID` LIKE '%$quick_find%'
 OR `Temprament2_ID` = $temp_ID
 OR `Temprament3_ID` = $temp_ID
