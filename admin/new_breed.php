@@ -260,7 +260,7 @@ echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/new_breed");?>">
             ?>
             <option value="Lap">Lap (cat likes company)</option>
             <option value="Non Lap">Non-Lap (cat is solitary)</option>
-            <option value="Rodent">Rodent (it is a rodent)</option>
+            <option value="Rodent">Rodent (it is a rodent catcher)</option>
             <option value="Generic">Generic (likes company and is solitary)</option>
         
         </select>

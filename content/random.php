@@ -8,6 +8,10 @@ JOIN `about` ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`) ORDER BY RAND() LIMIT
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
 
+
+$lapcat = $find_rs['LapCat_ID'];
+$fur = $find_rs['Fur_ID'];
+
 // Loop through results and display them...
 do {
 
@@ -22,12 +26,20 @@ do {
             <?php echo $full_name; ?>
         </a>
 
-        <!-- Get male weight -->
-        <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
+        
+    <!-- get male weight to display -->
+    <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
 
-        <!-- Get avg kitten price -->
-        <p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
+<!-- Get avg kitten price -->
+<p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
 
+
+<!-- Get fur and lap cat type -->
+<p>
+        <!-- get lapcat and fur tags to display -->
+    <?php include("show_lcf.php"); ?>
+
+    </p>
 
 
     </p>

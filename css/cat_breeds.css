@@ -274,6 +274,16 @@ a.colour:hover {
     color: #e07676;
 }
 
+a.lcf {
+    color: #000000;
+    text-decoration: none;
+}
+
+a.lcf {
+    color: #161515;
+    text-decoration: none;
+}
+
 /* controls input fields on autocomplete boxes (pink for and error, white for OK) */
 input.tag-error[type=text] {
     background-color: #ff9e9e;

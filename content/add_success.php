@@ -33,29 +33,20 @@ do {
             <?php echo $full_name; ?>
         </a>
 
-        <!-- Get male weight -->
-        <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
+        
+    <!-- get male weight to display -->
+    <p><b>Male Weight:</b> <?php echo $find_rs['MaleWtKg']; ?>kg </p>
 
-        <!-- Get avg kitten price -->
-        <p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
+<!-- Get avg kitten price -->
+<p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
 
-        <!-- Get fur type -->
-        <p>
-            <?php
-            // show fur type....
-            fur_lap($dbconnect, $fur, "Fur Type", "fur", "Fur_ID", 
-            "Fur")
-            ?>
-        </p>
 
-        <!-- Get lap type -->
-        <p>
-            <?php
-            // show lap type....
-            fur_lap($dbconnect, $lapcat, "Lap Cat Type", "lapcat", "LapCat_ID", 
-            "LapCat")
-            ?>
-        </p>
+<!-- Get fur and lap cat type -->
+<p>
+        <!-- get lapcat and fur tags to display -->
+    <?php include("show_lcf.php"); ?>
+
+    </p>
             <!-- get subject tags to display -->
             <?php include("show_temp.php"); ?>
         

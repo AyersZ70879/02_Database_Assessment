@@ -1,26 +1,24 @@
 <?php
-if(!isset($_REQUEST['tempID'])) {
+if(!isset($_REQUEST['lapID'])) {
     header('Location: index.php');
 }
 
-$temp_to_find = $_REQUEST['tempID'];
+$lap_to_find = $_REQUEST['lapID'];
 
-    // get temprament heading...
-    $temp_sql = "SELECT * FROM `temprament` WHERE `Temprament_ID` = $temp_to_find";
-    $temp_query = mysqli_query($dbconnect, $temp_sql);
-    $temp_rs = mysqli_fetch_assoc($temp_query);
+    // Find lapcat ID
+$lap_sql = "SELECT * FROM `lapcat` WHERE `LapCat_ID` LIKE '$lap_to_find'";
+$lap_query = mysqli_query($dbconnect, $lap_sql);
+$lap_rs = mysqli_fetch_assoc($lap_query);
 
 ?>
 
-<h2> Temperament Results (<?php echo $temp_rs['Temprament']?>) </h2>
+<h2> Lap Cat Type Results (<?php echo $lap_rs['LapCat']?>) </h2>
 
 <?php
 
 $find_sql = "SELECT * FROM `breeds`
 JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`)
-WHERE `Temprament1_ID` = $temp_to_find
-OR `Temprament2_ID` = $temp_to_find
-OR `Temprament3_ID` = $temp_to_find
+WHERE `LapCat_ID` = $lap_to_find
 ";
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
@@ -48,11 +46,14 @@ do {
     <!-- Get avg kitten price -->
     <p><b>Average Kitten Price: </b>$<?php echo $find_rs['AvgKittenPrice']; ?> </p>
 
-    <!-- Get fur type -->
+
+    <!-- Get fur and lap cat type -->
     <p>
             <!-- get lapcat and fur tags to display -->
         <?php include("show_lcf.php"); ?>
+
         </p>
+    
 
     <!-- temprament tags go here -->
     <?php include("show_temp.php"); ?>
