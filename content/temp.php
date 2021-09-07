@@ -21,6 +21,8 @@ JOIN about ON (`about`.`Breed_ID` = `breeds`.`Breed_ID`)
 WHERE `Temprament1_ID` = $temp_to_find
 OR `Temprament2_ID` = $temp_to_find
 OR `Temprament3_ID` = $temp_to_find
+OR `Temprament4_ID` = $temp_to_find
+OR `Temprament5_ID` = $temp_to_find
 ";
 $find_query = mysqli_query($dbconnect, $find_sql);
 $find_rs = mysqli_fetch_assoc($find_query);
